@@ -8,15 +8,13 @@ public class StackManager : MonoBehaviour
 
     #region Private Variables
     private LerpStackCommand _lerpStackCommand;
-    private ShakeStackCommand _shakeStackCommand;
     private AddStackCommand _addStackCommand;
 
     #endregion
 
     private void Awake()
     {
-        _shakeStackCommand = new ShakeStackCommand(ref Collectables);
-        _addStackCommand = new AddStackCommand(new AddStackKeyParams(ref Collectables, transform, this, ref _shakeStackCommand));
+        _addStackCommand = new AddStackCommand(new AddStackKeyParams(ref Collectables, transform, this));
         _lerpStackCommand = new LerpStackCommand(ref Collectables);
     }
 
@@ -29,14 +27,12 @@ public class StackManager : MonoBehaviour
     {
         CollectableEvents.OnCollectableWithStack += _addStackCommand.OnAddOnStack;
         CollectableEvents.OnMovementLerp += _lerpStackCommand.OnLerpTheStack;
-        CollectableEvents.OnShakeOnStack += _addStackCommand.OnShakeStack;
    
     }
     private void UnsubscribeEvents()
     {
         CollectableEvents.OnCollectableWithStack -= _addStackCommand.OnAddOnStack;
         CollectableEvents.OnMovementLerp -= _lerpStackCommand.OnLerpTheStack;
-        CollectableEvents.OnShakeOnStack -= _addStackCommand.OnShakeStack;
     }
     private void OnDisable()
     {

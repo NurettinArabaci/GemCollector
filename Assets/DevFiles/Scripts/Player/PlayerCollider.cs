@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class PlayerCollider : MonoBehaviour
 {
-    [SerializeField] private Transform stackTransform;
-
+    
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out ICollectible collectible))
+        if (other.TryGetComponent(out ICollectable collectible))
         {
-            collectible.Collected(stackTransform);
+            collectible.Collected();
         }
     }
 

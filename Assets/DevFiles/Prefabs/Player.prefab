@@ -955,7 +955,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c32ff4b11fe84cb2ba457412ed4f297, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stackTransform: {fileID: 486135665988666644}
 --- !u!54 &2664843774346326538
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2418,6 +2417,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2664843774346326537}
     m_Modifications:
+    - target: {fileID: 980442537860094064, guid: 504794d04e204433cb946ead5b7b0f11, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 980442537860094064, guid: 504794d04e204433cb946ead5b7b0f11, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 980442537860094064, guid: 504794d04e204433cb946ead5b7b0f11, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 980442537860094064, guid: 504794d04e204433cb946ead5b7b0f11, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
     - target: {fileID: 980442537860094066, guid: 504794d04e204433cb946ead5b7b0f11, type: 3}
       propertyPath: m_Pivot.x
       value: 0
