@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class Item : MonoBehaviour, ICollectable
 {
+    [System.Serializable]
+    public class ItemData
+    {
+        public string Name;
+        public Sprite Icon;
+        public Mesh mesh;
+    }
+
     public int Cost { get; set; }
 
     private Collider _collider;
