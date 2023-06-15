@@ -2521,6 +2521,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Joystick
       objectReference: {fileID: 0}
+    - target: {fileID: 6973185341749327318, guid: 504794d04e204433cb946ead5b7b0f11, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1080
+      objectReference: {fileID: 0}
+    - target: {fileID: 6973185341749327318, guid: 504794d04e204433cb946ead5b7b0f11, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1000
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 504794d04e204433cb946ead5b7b0f11, type: 3}
 --- !u!224 &2664843775070136684 stripped

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GridSpawner : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> tilePrefab = new List<GameObject>();
+    
     [Tooltip("X: column, Y: row")]
     [SerializeField] private Vector2Int tileDimensions = new Vector2Int(2, 2);
 
@@ -17,12 +17,11 @@ public class GridSpawner : MonoBehaviour
 
     [SerializeField] Mesh tileMesh;
 
-    private void Awake()
+    private void Start()
     {
-
         InstantiateItem();
     }
-    
+
     private void OnDrawGizmos()
     {
         
@@ -40,13 +39,14 @@ public class GridSpawner : MonoBehaviour
                     (y - ((float)row / 2) + 0.5f) * tileSize.y
                     );
 
-                Instantiate(tilePrefab[Random.Range(0, tilePrefab.Count)], pos, Quaternion.identity, transform);
+                ItemSpawnManager.Instance.GetRandomItem(pos, transform);
+
             }
     }
 
     private void DrawGridInEditor()
     {
-        if (!tileMesh)
+        if (tileMesh is null)
         {
             tileMesh = Resources.Load<Mesh>("GridMesh/Gem_Mesh");
         }
