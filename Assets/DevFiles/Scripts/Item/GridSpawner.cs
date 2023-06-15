@@ -39,7 +39,7 @@ public class GridSpawner : MonoBehaviour
                     (y - ((float)row / 2) + 0.5f) * tileSize.y
                     );
 
-                ItemSpawnManager.Instance.GetRandomItem(pos, transform);
+                SpawnManager.Instance.GetRandomItem(pos, transform);
 
             }
     }

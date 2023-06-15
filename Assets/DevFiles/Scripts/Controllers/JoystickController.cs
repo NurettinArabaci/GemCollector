@@ -4,14 +4,14 @@ public class JoystickController : FloatingJoystick
 {
     public override void OnPointerDown(PointerEventData eventData)
     {
-        EventManager.Fire_onMoveControl(MoveState.Move);
+        PlayerEvents.Fire_OnMoveControl(MoveState.Move);
 
         base.OnPointerDown(eventData);
     }
 
     public override void OnPointerUp(PointerEventData eventData)
     {
-        EventManager.Fire_onMoveControl(MoveState.Stop);
+        PlayerEvents.Fire_OnMoveControl(MoveState.Stop);
 
         base.OnPointerUp(eventData);
     }

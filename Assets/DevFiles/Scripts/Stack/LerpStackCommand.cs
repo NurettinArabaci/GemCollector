@@ -14,16 +14,17 @@ public class LerpStackCommand
 
     public void OnLerpTheStack()
     {
-        if (_collectables.Count < 1)
-        {
-            return;
-        }
+        if (_collectables.Count < 1) return;
+        
 
-        for (int i = 1; i <= _collectables.Count - 1; i++)
+        for (int i = _collectables.Count - 1; i >=1; i--)
         {
+           
             _collectables[i].transform.DOMove(_collectables[i - 1].transform.position+Vector3.up,0.2f);
+
             
         }
+
 
     }
 

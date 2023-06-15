@@ -3,10 +3,10 @@ using UnityEngine;
 
 public enum MoveState { Move, Stop }
 
-public partial class EventManager
+public partial class PlayerEvents
 {
-    public static System.Action<MoveState> onMoveControl;
-    public static void Fire_onMoveControl(MoveState state) { onMoveControl?.Invoke(state); }
+    public static System.Action<MoveState> OnMoveControl;
+    public static void Fire_OnMoveControl(MoveState state) { OnMoveControl?.Invoke(state); }
 }
 
 public class PlayerController : MonoBehaviour
@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
 
-        EventManager.onMoveControl += MoveControl;
+        PlayerEvents.OnMoveControl += MoveControl;
     }
 
     void MoveControl(MoveState state)
@@ -62,6 +62,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnDisable()
     {
-        EventManager.onMoveControl -= MoveControl;
+        PlayerEvents.OnMoveControl -= MoveControl;
     }
 }

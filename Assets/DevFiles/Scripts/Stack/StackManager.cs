@@ -26,12 +26,14 @@ public class StackManager : MonoBehaviour
     private void SubscribeEvents()
     {
         CollectableEvents.OnCollectableWithStack += _addStackCommand.OnAddOnStack;
+        CollectableEvents.OnRemoveCollectable += _addStackCommand.OnRemoveOnStack;
         CollectableEvents.OnMovementLerp += _lerpStackCommand.OnLerpTheStack;
    
     }
     private void UnsubscribeEvents()
     {
         CollectableEvents.OnCollectableWithStack -= _addStackCommand.OnAddOnStack;
+        CollectableEvents.OnRemoveCollectable -= _addStackCommand.OnRemoveOnStack;
         CollectableEvents.OnMovementLerp -= _lerpStackCommand.OnLerpTheStack;
     }
     private void OnDisable()

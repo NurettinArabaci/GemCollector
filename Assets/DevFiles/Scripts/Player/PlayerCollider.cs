@@ -9,12 +9,20 @@ public class PlayerCollider : MonoBehaviour
     {
         if (other.TryGetComponent(out Item collectable))
         {
-            ItemSpawnManager.Instance.GetRandomItem(collectable.transform.position, collectable.transform.parent);
+            SpawnManager.Instance.GetRandomItem(collectable.transform.position, collectable.transform.parent);
             collectable.Collected();
-            Debug.Log(collectable._itemData.Name);
-            
-            
+        }
+
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.TryGetComponent(out SalesArea area))
+        {
+            area.SaleItem();
         }
     }
+
+    
 
 }
