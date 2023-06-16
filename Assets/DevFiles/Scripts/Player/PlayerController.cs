@@ -34,8 +34,9 @@ public class PlayerController : MonoBehaviour
         while (state == MoveState.Move)
         {
             _rb.velocity = DirectionPose() * speed;
-            anim.SetFloat("MoveParam", _rb.velocity.magnitude / speed);
             transform.rotation = RotationPose();
+            anim.SetFloat("MoveParam", _rb.velocity.magnitude / speed);
+
 
             CollectableEvents.Fire_OnMovementLerp();
 

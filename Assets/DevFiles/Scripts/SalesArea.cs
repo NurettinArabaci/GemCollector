@@ -17,6 +17,4 @@ public class SalesArea : MonoBehaviour
         CollectableEvents.Fire_OnRemoveCollectable();
         saleTime = 0;
     }
-
-    
 }

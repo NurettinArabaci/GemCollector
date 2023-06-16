@@ -8,5 +8,6 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         DOTween.SetTweensCapacity(187500, 200);
+         
     }
 }

@@ -30,7 +30,6 @@ public class AddStackCommand
 
         mT.DOJump(_param._collectables[_param._collectables.Count - 1].transform.position + Vector3.up, 1, 1, 0.2f);
         
-
         _param._collectables.Add(gO);
 
     }
@@ -38,12 +37,18 @@ public class AddStackCommand
     public void OnRemoveOnStack()
     {
         if (_param._collectables.Count <=0) return;
+        
+        var obj = _param._collectables[_param._collectables.Count - 1].gameObject;
 
-        var obje = _param._collectables[_param._collectables.Count - 1].gameObject;
-        _param._collectables.Remove(obje);
+        Item objItem = obj.GetComponent<Item>();
+        objItem.CollectedAmount++;
+        UIEvents.Fire_OnUpdateItemAmount();
 
-        MonoBehaviour.Destroy(obje);
-        DOTween.Kill(obje.transform);
+        _param._collectables.Remove(obj);
+        MonoBehaviour.Destroy(obj);
+        DOTween.Kill(obj.transform);
+
+        
     }
 
 }
