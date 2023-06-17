@@ -9,6 +9,8 @@ public class Money : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI _moneyText;
 
+    [SerializeField] Transform target;
+
     const string MONEY = "Money";
 
     public int MoneyAmount
@@ -19,7 +21,7 @@ public class Money : MonoBehaviour
 
     private void Awake()
     {
-        UpdateMoney(0);
+        _moneyText.SetText(MoneyAmount.ToString() + " $");
     }
 
     private void OnEnable()
@@ -31,7 +33,10 @@ public class Money : MonoBehaviour
     {
         transform.DOScale(1.1f, 0.1f).OnComplete(()=> transform.DOScale(1f, 0.1f));
         MoneyAmount += _money;
-        _moneyText.SetText(MoneyAmount.ToString());
+        _moneyText.SetText(MoneyAmount.ToString()+" $");
+
+        SpawnManager.Instance.MoneyEarnVfx().SetMoneyAmount(_money, target);
+
     }
 
     private void OnDisable()

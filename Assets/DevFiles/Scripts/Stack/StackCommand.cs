@@ -1,18 +1,18 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-public class AddStackCommand
+public class StackCommand
 {
-    private AddStackKeyParams _param;
+    private StackParameters _param;
 
-    public AddStackCommand(AddStackKeyParams param)
+    public StackCommand(StackParameters param)
     {
         _param = param;
     }
 
-    public void OnAddOnStack(GameObject gO)
+    public void OnStackItem(GameObject gO)
     {
         Transform mT = gO.transform;
 
@@ -22,34 +22,31 @@ public class AddStackCommand
         {
 
             mT.DOJump(_param._transform.position + Vector3.up, 1, 1, 0.1f).OnComplete(() => mT.localPosition = Vector3.up);
-            
+
             _param._collectables.Add(gO);
 
             return;
         }
 
-        mT.DOJump(_param._collectables[_param._collectables.Count - 1].transform.position + Vector3.up, 1, 1, 0.2f);
-        
+        mT.DOJump(_param._collectables[_param._collectables.Count - 1].transform.position + Vector3.up, 1, 1, 0.25f).SetUpdate(UpdateType.Late);
+
         _param._collectables.Add(gO);
 
     }
 
-    public void OnRemoveOnStack()
+    public void OnRemoveStack()
     {
-        if (_param._collectables.Count <=0) return;
-        
+        if (_param._collectables.Count <= 0) return;
+
         var obj = _param._collectables[_param._collectables.Count - 1].gameObject;
 
-        Item objItem = obj.GetComponent<Item>();
-        objItem.CollectedAmount++;
-        UIEvents.Fire_OnUpdateMoney(objItem.Cost);
-        UIEvents.Fire_OnUpdateItemAmount();
+        obj.GetComponent<Item>().SoldItem();
 
         _param._collectables.Remove(obj);
         MonoBehaviour.Destroy(obj);
         DOTween.Kill(obj.transform);
 
-        
+
     }
 
 }

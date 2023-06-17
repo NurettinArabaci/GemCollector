@@ -6,6 +6,9 @@ public class SpawnManager : MonoSingleton<SpawnManager>
 {
     [SerializeField] private Item itemPrefab;
 
+    [SerializeField] private MoneyVfx _moneyPrefab;
+    [SerializeField] private Transform _moneySpawnTransform;
+
 
     public List<ItemData> itemDatas = new List<ItemData>();
 
@@ -18,6 +21,9 @@ public class SpawnManager : MonoSingleton<SpawnManager>
         return item;
     }
 
-    
+    public MoneyVfx MoneyEarnVfx()
+    {
+       return Instantiate(_moneyPrefab, _moneySpawnTransform.position, Quaternion.identity, _moneySpawnTransform);
+    }
 
 }

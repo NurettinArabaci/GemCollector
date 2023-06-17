@@ -1,18 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class CamController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] Transform target;
+    [SerializeField] Vector3 offset = new Vector3(0f, 2f, -10f);
+    [SerializeField] float distanceDamp = 10f;
 
-    // Update is called once per frame
-    void Update()
+    Transform myT;
+    void Awake()
     {
-        
+        myT = transform;
+    }
+    
+
+    void LateUpdate()
+    {
+        Vector3 toPos = target.position + offset;
+        Vector3 curPos = Vector3.Lerp(myT.position,toPos, distanceDamp * Time.deltaTime);
+        myT.position = curPos;
     }
 }

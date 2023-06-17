@@ -16,24 +16,34 @@ public class PlayerController : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
 
         PlayerEvents.OnMoveControl += MoveControl;
+
     }
 
     void MoveControl(MoveState state)
     {
         StartCoroutine(MoveCR(state));
+
+        if (GameManager.Instance.gameState == GameState.Begin)
+        {
+            GameStateEvent.Fire_OnChangeGameState(GameState.Play);
+        }
+
+            
     }
+
 
     IEnumerator MoveCR(MoveState state)
     {
+        
+
         while (state == MoveState.Move)
         {
+            
             _rb.velocity = DirectionPose() * speed;
             transform.rotation = RotationPose();
             anim.SetFloat("MoveParam", _rb.velocity.magnitude / speed);
 
-
-            CollectableEvents.Fire_OnMovementLerp();
-
+            CollectableEvents.Fire_OnMovementLerp(this);
             yield return null;
         }
 
@@ -44,6 +54,7 @@ public class PlayerController : MonoBehaviour
 
     Vector3 DirectionPose()
     {
+        
         return Vector3.forward * joystick.Vertical + Vector3.right * joystick.Horizontal; ;
     }
 

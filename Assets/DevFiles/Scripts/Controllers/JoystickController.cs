@@ -7,7 +7,6 @@ public class JoystickController : FloatingJoystick
         PlayerEvents.Fire_OnMoveControl(MoveState.Move);
 
         base.OnPointerDown(eventData);
-        GameStateEvent.Fire_OnChangeGameState(GameState.Play);
     }
 
     public override void OnPointerUp(PointerEventData eventData)

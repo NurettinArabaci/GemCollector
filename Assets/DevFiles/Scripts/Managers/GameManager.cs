@@ -1,12 +1,5 @@
 using UnityEngine;
 using DG.Tweening;
-/*
-public partial class GameStateEvent
-{
-    public static event System.Action<GameState> OnChangeGameState;
-    public static void Fire_OnChangeGameState(GameState gameState) { OnChangeGameState?.Invoke(gameState); }
-}
-*/
 
 public class GameManager : MonoSingleton<GameManager>
 {
@@ -79,11 +72,5 @@ public enum GameState
     Begin,
     Play,
     PopUp
-}
-
-public enum VfxType
-{
-    Upgrade,
-    GameEnd
 }
 

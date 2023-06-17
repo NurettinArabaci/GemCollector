@@ -68,6 +68,13 @@ public class Item : MonoBehaviour//, ICollectable
         CollectableEvents.Fire_OnCollectableWithStack(this.gameObject);
     }
 
+    public void SoldItem()
+    {
+        CollectedAmount++;
+        UIEvents.Fire_OnUpdateMoney(this.Cost);
+        UIEvents.Fire_OnUpdateItemAmount();
+    }
+
     
 
 }

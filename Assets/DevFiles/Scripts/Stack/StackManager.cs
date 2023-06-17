@@ -7,15 +7,15 @@ public class StackManager : MonoBehaviour
     public List<GameObject> Collectables = new List<GameObject>();
 
     #region Private Variables
-    private LerpStackCommand _lerpStackCommand;
-    private AddStackCommand _addStackCommand;
+    private LerpStack _lerpStack;
+    private StackCommand _stackCommand;
 
     #endregion
 
     private void Awake()
     {
-        _addStackCommand = new AddStackCommand(new AddStackKeyParams(ref Collectables, transform, this));
-        _lerpStackCommand = new LerpStackCommand(ref Collectables);
+        _stackCommand = new StackCommand(new StackParameters(ref Collectables, transform, this));
+        _lerpStack = new LerpStack(ref Collectables);
     }
 
     #region Event Subscription
@@ -25,16 +25,16 @@ public class StackManager : MonoBehaviour
     }
     private void SubscribeEvents()
     {
-        CollectableEvents.OnCollectableWithStack += _addStackCommand.OnAddOnStack;
-        CollectableEvents.OnSaleCollectable += _addStackCommand.OnRemoveOnStack;
-        CollectableEvents.OnMovementLerp += _lerpStackCommand.OnLerpTheStack;
+        CollectableEvents.OnCollectableWithStack += _stackCommand.OnStackItem;
+        CollectableEvents.OnSaleCollectable += _stackCommand.OnRemoveStack;
+        CollectableEvents.OnMovementLerp += _lerpStack.OnLerpStack;
    
     }
     private void UnsubscribeEvents()
     {
-        CollectableEvents.OnCollectableWithStack -= _addStackCommand.OnAddOnStack;
-        CollectableEvents.OnSaleCollectable -= _addStackCommand.OnRemoveOnStack;
-        CollectableEvents.OnMovementLerp -= _lerpStackCommand.OnLerpTheStack;
+        CollectableEvents.OnCollectableWithStack -= _stackCommand.OnStackItem;
+        CollectableEvents.OnSaleCollectable -= _stackCommand.OnRemoveStack;
+        CollectableEvents.OnMovementLerp -= _lerpStack.OnLerpStack;
     }
     private void OnDisable()
     {
