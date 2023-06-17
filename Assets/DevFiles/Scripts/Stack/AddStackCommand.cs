@@ -42,6 +42,7 @@ public class AddStackCommand
 
         Item objItem = obj.GetComponent<Item>();
         objItem.CollectedAmount++;
+        UIEvents.Fire_OnUpdateMoney(objItem.Cost);
         UIEvents.Fire_OnUpdateItemAmount();
 
         _param._collectables.Remove(obj);

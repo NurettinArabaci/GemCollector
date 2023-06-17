@@ -2,18 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnManager : MonoBehaviour
+public class SpawnManager : MonoSingleton<SpawnManager>
 {
     [SerializeField] private Item itemPrefab;
 
-    public static SpawnManager Instance;
 
     public List<ItemData> itemDatas = new List<ItemData>();
-
-    private void Awake()
-    {
-        Instance = this;
-    }
 
     public Item GetRandomItem(Vector3 pos, Transform _transform)
     {

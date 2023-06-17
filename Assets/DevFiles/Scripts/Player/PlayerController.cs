@@ -3,12 +3,6 @@ using UnityEngine;
 
 public enum MoveState { Move, Stop }
 
-public partial class PlayerEvents
-{
-    public static System.Action<MoveState> OnMoveControl;
-    public static void Fire_OnMoveControl(MoveState state) { OnMoveControl?.Invoke(state); }
-}
-
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody _rb;

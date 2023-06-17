@@ -19,9 +19,8 @@ public class LerpStackCommand
 
         for (int i = _collectables.Count - 1; i >=1; i--)
         {
-           
-            _collectables[i].transform.DOMove(_collectables[i - 1].transform.position+Vector3.up,0.2f);
 
+            _collectables[i].transform.DOMove(_collectables[i - 1].transform.position + Vector3.up, 0.2f);
             
         }
 

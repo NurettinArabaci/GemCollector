@@ -7,10 +7,10 @@ public class PlayerCollider : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Item collectable))
+        if (other.TryGetComponent(out Item item))
         {
-            SpawnManager.Instance.GetRandomItem(collectable.transform.position, collectable.transform.parent);
-            collectable.Collected();
+            SpawnManager.Instance.GetRandomItem(item.transform.position, item.transform.parent);
+            item.Collected();
         }
 
     }

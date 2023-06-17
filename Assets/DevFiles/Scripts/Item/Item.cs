@@ -1,57 +1,64 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Item : MonoBehaviour//, ICollectable
 {
+    #region Properties
     public ItemData _itemData { get; set; }
+
+    public Vector3 Scale
+    {
+        get => transform.localScale;
+        set => transform.localScale = value;
+    }
 
     public int Cost
     {
-        get { return (int)(_itemData.Cost + Math.Round(transform.localScale.x * 100)); }
-        set { _itemData.Cost = value; }
+        get => (int)(_itemData.Cost + Math.Round(transform.localScale.x * 100));
+        set => _itemData.Cost = value;
     }
 
     public int CollectedAmount
     {
-        get { return PlayerPrefs.GetInt(_itemData.Name, 0); }
-        set { PlayerPrefs.SetInt(_itemData.Name, value); }
-
+        get => PlayerPrefs.GetInt(_itemData.Name, 0);
+        set => PlayerPrefs.SetInt(_itemData.Name, value);
     }
 
-    
-    private Collider _collider;
-    private bool isCollect = false;
-
-    private void Awake()
+    public Collider mCollider
     {
-        _collider = GetComponent<Collider>();
+        get => GetComponent<Collider>();
     }
+    #endregion
+
+    #region Private Variables
+    private bool isCollect = false;
+    #endregion
 
     private void OnEnable()
     {
-        StartCoroutine(GrowUpCR());
-        
+        StartCoroutine(GrowUpCR());       
     }
 
     IEnumerator GrowUpCR()
     {
-        transform.localScale = Vector3.zero;
+        Scale = Vector3.zero;
 
         float growUnit = 0;
 
-        while (transform.localScale.x < 1 && !isCollect)
+        while (Scale.x < 1 && !isCollect)
         {
-            growUnit += Time.deltaTime / 5;
-            transform.localScale = growUnit * Vector3.one;
+            if(GameManager.Instance.gameState != GameState.Begin)
+                growUnit += Time.deltaTime / 5;
 
-            _collider.enabled = transform.localScale.x >= 0.25f;
+            Scale = growUnit * Vector3.one;
+
+            mCollider.enabled = Scale.x >= 0.25f;
 
             yield return null;
         }
 
-        transform.localScale = transform.localScale.x > 0.99f ? Vector3.one : transform.localScale;
+        Scale = Scale.x > 0.99f ? Vector3.one : Scale;
     }
 
     public void Collected()

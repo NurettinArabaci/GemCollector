@@ -2,9 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider))]
 public class SalesArea : MonoBehaviour
 {
     float saleTime = 0;
+
+    private void Awake()
+    {
+        GetComponent<Collider>().isTrigger = true;
+    }
 
     public void SaleItem()
     {
@@ -14,7 +20,7 @@ public class SalesArea : MonoBehaviour
 
             return;
         }
-        CollectableEvents.Fire_OnRemoveCollectable();
+        CollectableEvents.Fire_OnSaleCollectable();
         saleTime = 0;
     }
 }
