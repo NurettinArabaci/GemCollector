@@ -45,13 +45,14 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void HandleBegin()
     {
-        
+        UIManager.Instance.StartPanelActive(true);
 
     }
 
     public void HandlePlay()
     {
         Time.timeScale = 1;
+        UIManager.Instance.StartPanelActive(false);
     }
 
     public void HandlePopUp()

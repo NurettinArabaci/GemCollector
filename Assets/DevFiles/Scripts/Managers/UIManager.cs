@@ -5,16 +5,24 @@ using UnityEngine.UI;
 using DG.Tweening;
 
 
-public class UIManager : MonoBehaviour
+public class UIManager : MonoSingleton<UIManager>
 {
-    [SerializeField] GameObject popUpPanel;
+    [SerializeField] GameObject popUpPanel,_startPanel;
     [SerializeField] Button _popUpOpenButton, _popUpCloseButton;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         PopUpOpenButton();
         PopUpCloseButton();
 
+    }
+
+    public void StartPanelActive(bool state)
+    {
+       
+        _startPanel.SetActive(state);
     }
 
     void PopUpOpenButton()
@@ -23,7 +31,7 @@ public class UIManager : MonoBehaviour
         {
             popUpPanel.SetActive(true);
             popUpPanel.transform.localScale = Vector3.zero;
-            popUpPanel.transform.DOScale(1, 0.4f);
+            popUpPanel.transform.DOScale(1, 0.4f).OnComplete(()=>GameStateEvent.Fire_OnChangeGameState(GameState.PopUp));
 
             _popUpOpenButton.transform.DOScale(0, 0.1f).OnComplete(() =>
                 _popUpOpenButton.gameObject.SetActive(false));
@@ -37,6 +45,8 @@ public class UIManager : MonoBehaviour
     {
         _popUpCloseButton.onClick.AddListener(() =>
         {
+            GameStateEvent.Fire_OnChangeGameState(GameState.Play);
+
             popUpPanel.transform.DOScale(0, 0.2f).OnComplete(() => popUpPanel.SetActive(false));
             _popUpOpenButton.gameObject.SetActive(true);
             _popUpOpenButton.transform.DOScale(1, 0.2f);
