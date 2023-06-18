@@ -25,8 +25,6 @@ public class ItemUI : MonoBehaviour
     private void UpdateItemAmount()
     {
         _gemAmount.SetText(PlayerPrefs.GetInt(GemName).ToString());
-
-        //_gemAmount.SetText(PlayerPrefs.GetInt(itemData.Name).ToString());
     }
 
     private void OnDisable()

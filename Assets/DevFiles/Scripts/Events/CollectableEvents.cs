@@ -9,7 +9,7 @@ public class CollectableEvents
     public static event Action OnSaleCollectable;
     public static void Fire_OnSaleCollectable() { OnSaleCollectable?.Invoke(); }
 
-    public static event Action<MonoBehaviour> OnMovementLerp;
-    public static void Fire_OnMovementLerp(MonoBehaviour monoBehaviour) { OnMovementLerp?.Invoke(monoBehaviour); }
+    public static event Action OnMovementLerp;
+    public static void Fire_OnMovementLerp() { OnMovementLerp?.Invoke(); }
 
 }

@@ -1,8 +1,6 @@
 using System.Collections;
 using UnityEngine;
 
-public enum MoveState { Move, Stop }
-
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody _rb;
@@ -15,42 +13,19 @@ public class PlayerController : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
 
-        PlayerEvents.OnMoveControl += MoveControl;
-
     }
 
-    void MoveControl(MoveState state)
+    
+    private void FixedUpdate()
     {
-        StartCoroutine(MoveCR(state));
+        if (GameManager.Instance.gameState != GameState.Play) return;
 
-        if (GameManager.Instance.gameState == GameState.Begin)
-        {
-            GameStateEvent.Fire_OnChangeGameState(GameState.Play);
-        }
-
-            
+        _rb.velocity = DirectionPose() * speed;
+        transform.rotation = RotationPose();
+        anim.SetFloat("MoveParam", _rb.velocity.magnitude / speed);
+        CollectableEvents.Fire_OnMovementLerp();
     }
-
-
-    IEnumerator MoveCR(MoveState state)
-    {
-        
-
-        while (state == MoveState.Move)
-        {
-            
-            _rb.velocity = DirectionPose() * speed;
-            transform.rotation = RotationPose();
-            anim.SetFloat("MoveParam", _rb.velocity.magnitude / speed);
-
-            CollectableEvents.Fire_OnMovementLerp(this);
-            yield return null;
-        }
-
-        _rb.velocity = Vector3.zero;
-        anim.SetFloat("MoveParam", 0);
-
-    }
+    
 
     Vector3 DirectionPose()
     {
@@ -66,8 +41,4 @@ public class PlayerController : MonoBehaviour
         return transform.rotation;
     }
 
-    private void OnDisable()
-    {
-        PlayerEvents.OnMoveControl -= MoveControl;
-    }
 }

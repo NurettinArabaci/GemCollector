@@ -16,6 +16,11 @@ public class ItemUISpawner : MonoBehaviour
         
     }
 
+    private void OnEnable()
+    {
+        GetComponent<RectTransform>().localPosition = Vector3.zero;
+    }
+
     private void Start()
     {
         SpawnItemUI();
