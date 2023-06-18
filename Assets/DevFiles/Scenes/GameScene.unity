@@ -2463,18 +2463,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1074246119, guid: 19248fe3f042e4a28a0478d75b3b75c6, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 540
-      objectReference: {fileID: 0}
-    - target: {fileID: 1074246119, guid: 19248fe3f042e4a28a0478d75b3b75c6, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -800
-      objectReference: {fileID: 0}
-    - target: {fileID: 2664843774346326536, guid: 19248fe3f042e4a28a0478d75b3b75c6, type: 3}
-      propertyPath: speed
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 2664843774346326537, guid: 19248fe3f042e4a28a0478d75b3b75c6, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -2518,10 +2506,6 @@ PrefabInstance:
     - target: {fileID: 2664843774346326537, guid: 19248fe3f042e4a28a0478d75b3b75c6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2664843774346326538, guid: 19248fe3f042e4a28a0478d75b3b75c6, type: 3}
-      propertyPath: m_Interpolate
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2664843774346326550, guid: 19248fe3f042e4a28a0478d75b3b75c6, type: 3}
       propertyPath: m_Name
