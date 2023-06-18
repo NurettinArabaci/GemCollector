@@ -36,6 +36,8 @@ public class UIManager : MonoSingleton<UIManager>
             _popUpOpenButton.transform.DOScale(0, 0.1f).OnComplete(() =>
                 _popUpOpenButton.gameObject.SetActive(false));
 
+            SoundEvents.Fire_OnPlaySfx(SoundManager.Instance.buttonClickSfx);
+
         });
 
         
@@ -51,7 +53,7 @@ public class UIManager : MonoSingleton<UIManager>
             _popUpOpenButton.gameObject.SetActive(true);
             _popUpOpenButton.transform.DOScale(1, 0.2f);
 
-            
+            SoundEvents.Fire_OnPlaySfx(SoundManager.Instance.buttonClickSfx);
         });
     }
      

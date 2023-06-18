@@ -66,6 +66,8 @@ public class Item : MonoBehaviour//, ICollectable
         isCollect = true;
 
         CollectableEvents.Fire_OnCollectableWithStack(this.gameObject);
+
+        SoundEvents.Fire_OnPlaySfx(SoundManager.Instance.gemCollectSfx);
     }
 
     public void SoldItem()
@@ -73,6 +75,7 @@ public class Item : MonoBehaviour//, ICollectable
         CollectedAmount++;
         UIEvents.Fire_OnUpdateMoney(this.Cost);
         UIEvents.Fire_OnUpdateItemAmount();
+        SoundEvents.Fire_OnPlaySfx(SoundManager.Instance.gemSaleSfx);
     }
 
     
