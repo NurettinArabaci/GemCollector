@@ -1,9 +1,21 @@
+using System;
 using System.Collections;
 using UnityEngine;
+
+public enum MoveType { Move, Stop }
+
+public class PlayerEvents
+{
+    public static event Action<MoveType> OnMove;
+    public static void Fire_OnMove(MoveType moveType) { OnMove?.Invoke(moveType); }
+
+}
 
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody _rb;
+
+    MoveType moveType;
 
     [SerializeField] private JoystickController joystick;
     [SerializeField] private int speed = 1;
@@ -13,6 +25,19 @@ public class PlayerController : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
 
+        PlayerEvents.OnMove += Move;
+
+    }
+
+    private void OnDisable()
+    {
+        PlayerEvents.OnMove -= Move;
+    }
+
+    private void Move(MoveType type)
+    {
+        moveType = type;
+        StartCoroutine(MoveCR());
     }
 
     
@@ -39,6 +64,22 @@ public class PlayerController : MonoBehaviour
             return Quaternion.LookRotation(_rb.velocity);
 
         return transform.rotation;
+    }
+
+    IEnumerator MoveCR()
+    {
+        while (moveType == MoveType.Move)
+        {
+            _rb.velocity = DirectionPose() * speed;
+            transform.rotation = RotationPose();
+            anim.SetFloat("MoveParam", _rb.velocity.magnitude / speed);
+            CollectableEvents.Fire_OnMovementLerp();
+
+            yield return null;
+        }
+
+        _rb.velocity = Vector3.zero;
+        anim.SetFloat("MoveParam", 0);
     }
 
 }

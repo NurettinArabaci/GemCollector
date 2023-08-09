@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using DG.Tweening;
@@ -21,7 +19,7 @@ public class Money : MonoBehaviour
 
     private void Awake()
     {
-        _moneyText.SetText(MoneyAmount.ToString() + " $");
+        _moneyText.SetText(MoneyText());
     }
 
     private void OnEnable()
@@ -33,10 +31,24 @@ public class Money : MonoBehaviour
     {
         transform.DOScale(1.1f, 0.1f).OnComplete(()=> transform.DOScale(1f, 0.1f));
         MoneyAmount += _money;
-        _moneyText.SetText(MoneyAmount.ToString()+" $");
+        _moneyText.SetText(MoneyText());
 
         SpawnManager.Instance.MoneyEarnVfx().SetMoneyAmount(_money, target);
 
+    }
+
+    string MoneyText()
+    {
+        if (MoneyAmount > 999 && MoneyAmount < 1000000)
+        {
+            return $"{String.Format("{0:0.00}", Math.Round((float)MoneyAmount / 1000, 2))}K $";
+        }
+        else if (MoneyAmount >=1000000  && MoneyAmount < 1000000000)
+        {
+            return $"{String.Format("{0:0.00}", Math.Round((float)MoneyAmount / 1000000, 2))}M $";
+        }
+            
+        return MoneyAmount.ToString() + " $";
     }
 
     private void OnDisable()

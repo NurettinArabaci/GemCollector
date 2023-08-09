@@ -1121,11 +1121,11 @@ MonoBehaviour:
     Icon: {fileID: 21300000, guid: b2c37c9a32cf84ab9809b21b4a746aa5, type: 3}
     meshRenderer: {fileID: -7511558181221131132, guid: 501116592da8e4a8eb551e7131106ea1, type: 3}
   - Name: 'Pink Gem '
-    Cost: 10
+    Cost: 50
     Icon: {fileID: 21300000, guid: bdd5e67cf62884bdeb71d283d1931c67, type: 3}
     meshRenderer: {fileID: -7511558181221131132, guid: a260ae9810f674a0392d99d6ada7e831, type: 3}
   - Name: 'Yellow Gem '
-    Cost: 15
+    Cost: 65
     Icon: {fileID: 21300000, guid: 40e5e8111350d476281fef80030d94de, type: 3}
     meshRenderer: {fileID: -7511558181221131132, guid: 162c72a567129495ca54d53ed37b2d3c, type: 3}
 --- !u!1 &755812359
